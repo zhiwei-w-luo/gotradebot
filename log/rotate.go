@@ -2,13 +2,13 @@ package log
 
 import (
 	"errors"
+	"fmt"
 	"os"
 	"path/filepath"
 	"sync"
-	"fmt"
 	"time"
 
-	"github.com/gotradebot/common/file"
+	"github.com/zhiwei-w-luo/gotradebot/common/file"
 )
 
 const (

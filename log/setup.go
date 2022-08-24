@@ -6,6 +6,8 @@ import (
 	"io"
 	"os"
 	"strings"
+
+	"github.com/zhiwei-w-luo/gotradebot/common/convert"
 )
 
 var (

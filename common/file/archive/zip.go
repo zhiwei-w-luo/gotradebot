@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/gotradebot/log"
+	"github.com/zhiwei-w-luo/gotradebot/log"
 )
 
 const (
