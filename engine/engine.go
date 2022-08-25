@@ -10,6 +10,7 @@ import (
 	"strings"
 	"sync"
 	"time"
+
 	"github.com/zhiwei-w-luo/gotradebot/config"
 
 )
@@ -17,12 +18,12 @@ import (
 // Engine contains configuration, portfolio manager, exchange & ticker data and is the
 // overarching type across this code base.
 type Engine struct {
-	Config                  *config.Config
-	connectionManager       *connectionManager
-	DatabaseManager         *DatabaseConnectionManager
-	Settings                Settings
-	uptime                  time.Time
-	ServicesWG              sync.WaitGroup
+	Config            *config.Config
+	connectionManager *connectionManager
+	DatabaseManager   *DatabaseConnectionManager
+	Settings          Settings
+	uptime            time.Time
+	ServicesWG        sync.WaitGroup
 }
 
 // Bot is a happy global engine to allow various areas of the application
@@ -511,7 +512,6 @@ func (bot *Engine) Stop() {
 	}
 }
 
-
 // FlagSet defines set flags from command line args for comparison methods
 type FlagSet map[string]bool
 
@@ -522,6 +522,3 @@ func (f FlagSet) WithBool(key string, flagValue *bool, configValue bool) {
 	isSet := f[key]
 	*flagValue = !isSet && configValue || isSet && *flagValue
 }
-
-
-

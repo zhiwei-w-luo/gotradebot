@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"sync/atomic"
 
-	"github.com/zhiwei-w-luo/gotradebot/log"
-	"github.com/zhiwei-w-luo/gotradebot/connchecker"
 	"github.com/zhiwei-w-luo/gotradebot/config"
+	"github.com/zhiwei-w-luo/gotradebot/connchecker"
+	"github.com/zhiwei-w-luo/gotradebot/log"
 )
 
 // ConnectionManagerName is an exported subsystem name
