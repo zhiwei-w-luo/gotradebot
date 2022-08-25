@@ -5,13 +5,27 @@ import (
 	"fmt"
 	"sync/atomic"
 
+	"github.com/zhiwei-w-luo/gotradebot/log"
 	"github.com/zhiwei-w-luo/gotradebot/connchecker"
+	"github.com/zhiwei-w-luo/gotradebot/config"
 )
 
 // ConnectionManagerName is an exported subsystem name
 const ConnectionManagerName = "internet_monitor"
 
-var errConnectionCheckerIsNil = errors.New("connection checker is nil")
+var (
+	// ErrSubSystemAlreadyStarted message to return when a subsystem is already started
+	ErrSubSystemAlreadyStarted = errors.New("subsystem already started")
+	// ErrSubSystemNotStarted message to return when subsystem not started
+	ErrSubSystemNotStarted = errors.New("subsystem not started")
+	// ErrNilSubsystem is returned when a subsystem hasn't had its Setup() func run
+	ErrNilSubsystem                 = errors.New("subsystem not setup")
+	errNilWaitGroup                 = errors.New("nil wait group received")
+	errNilExchangeManager           = errors.New("cannot start with nil exchange manager")
+	errNilDatabaseConnectionManager = errors.New("cannot start with nil database connection manager")
+	errNilConfig                    = errors.New("received nil config")
+	errConnectionCheckerIsNil       = errors.New("connection checker is nil")
+)
 
 // connectionManager manages the connchecker
 type connectionManager struct {
