@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/zhiwei-w-luo/gotradebot/database"
+	"github.com/zhiwei-w-luo/gotradebot/log"
 )
 
 // Constants declared here are filename strings and test strings
@@ -64,8 +65,7 @@ var (
 )
 
 // Config is the overarching object that holds all the information for
-// prestart management of Portfolio, Communications, Webserver and Enabled
-// Exchanges
+// prestart management of Portfolio, Webserver and Enabled Exchanges
 type Config struct {
 	Name                 string                    `json:"name"`
 	DataDirectory        string                    `json:"dataDirectory"`
@@ -73,25 +73,7 @@ type Config struct {
 	GlobalHTTPTimeout    time.Duration             `json:"globalHTTPTimeout"`
 	Database             database.Config           `json:"database"`
 	Logging              log.Config                `json:"logging"`
-	ConnectionMonitor    ConnectionMonitorConfig   `json:"connectionMonitor"`
-	DataHistoryManager   DataHistoryManager        `json:"dataHistoryManager"`
-	CurrencyStateManager CurrencyStateManager      `json:"currencyStateManager"`
-	Profiler             Profiler                  `json:"profiler"`
-	NTPClient            NTPClientConfig           `json:"ntpclient"`
-	GCTScript            gctscript.Config          `json:"gctscript"`
-	Currency             currency.Config           `json:"currencyConfig"`
-	Communications       base.CommunicationsConfig `json:"communications"`
-	RemoteControl        RemoteControlConfig       `json:"remoteControl"`
-	Portfolio            portfolio.Base            `json:"portfolioAddresses"`
-	Exchanges            []Exchange                `json:"exchanges"`
-	BankAccounts         []banking.Account         `json:"bankAccounts"`
 
-	// Deprecated config settings, will be removed at a future date
-	Webserver           *WebserverConfig      `json:"webserver,omitempty"`
-	CurrencyPairFormat  *currency.PairFormat  `json:"currencyPairFormat,omitempty"`
-	FiatDisplayCurrency *currency.Code        `json:"fiatDispayCurrency,omitempty"`
-	Cryptocurrencies    *currency.Currencies  `json:"cryptocurrencies,omitempty"`
-	SMS                 *base.SMSGlobalConfig `json:"smsGlobal,omitempty"`
 	// encryption session values
 	storedSalt []byte
 	sessionDK  []byte

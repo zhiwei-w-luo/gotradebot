@@ -8,23 +8,6 @@ import (
 	"sync"
 )
 
-// Instance holds all information for a database instance
-type Instance struct {
-	SQL       *sql.DB
-	DataPath  string
-	config    *Config
-	connected bool
-	m         sync.RWMutex
-}
-
-// Config holds all database configurable options including enable/disabled & DSN settings
-type Config struct {
-	Enabled                   bool   `json:"enabled"`
-	Verbose                   bool   `json:"verbose"`
-	Driver                    string `json:"driver"`
-	ConnectionDetails `json:"connectionDetails"`
-}
-
 var (
 	// DB Global Database Connection
 	DB = &Instance{}
@@ -57,6 +40,36 @@ const (
 	DBInvalidDriver = "invalid driver"
 )
 
+// Instance holds all information for a database instance
+type Instance struct {
+	SQL       *sql.DB
+	DataPath  string
+	config    *Config
+	connected bool
+	m         sync.RWMutex
+}
+
+
+// ConnectionDetails holds DSN information
+type ConnectionDetails struct {
+	Host     string `json:"host"`
+	Port     uint16 `json:"port"`
+	Username string `json:"username"`
+	Password string `json:"password"`
+	Database string `json:"database"`
+	SSLMode  string `json:"sslmode"`
+}
+
+// Config holds all database configurable options including enable/disabled & DSN settings
+type Config struct {
+	Enabled                   bool   `json:"enabled"`
+	Verbose                   bool   `json:"verbose"`
+	Driver                    string `json:"driver"`
+	ConnectionDetails `json:"connectionDetails"`
+}
+
+
+
 // IDatabase allows for the passing of a database struct
 // without giving the receiver access to all functionality
 type IDatabase interface {
@@ -75,14 +88,4 @@ type ISQL interface {
 	ExecContext(context.Context, string, ...interface{}) (sql.Result, error)
 	QueryContext(context.Context, string, ...interface{}) (*sql.Rows, error)
 	QueryRowContext(context.Context, string, ...interface{}) *sql.Row
-}
-
-// ConnectionDetails holds DSN information
-type ConnectionDetails struct {
-	Host     string `json:"host"`
-	Port     uint16 `json:"port"`
-	Username string `json:"username"`
-	Password string `json:"password"`
-	Database string `json:"database"`
-	SSLMode  string `json:"sslmode"`
 }
